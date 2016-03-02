@@ -30,7 +30,8 @@ app.use('/', function(req,res,next){
         if(i==='user-agent')
            var software = header[i].split('(')[1].split(')')[0]
     }
-    
+    var ipaddress = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress;
+
     res.send({ipaddress:req.connection.remoteAddress,language:language,software:software});
 });
 
