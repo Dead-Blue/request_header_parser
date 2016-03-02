@@ -23,7 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', function(req,res,next){
-    res.send({ipaddress:req.ip,language:req.rawHeaders[15].split(',')[0],software:req.rawHeaders[11].split('(')[1].split(')')[0]});
+    var headerString = JSON.stringify(req.headers);
+    res.send({ipaddress:req.ip,language:headerString.slice(headerString.indexOf('accept-language'),headerString.indexOf('cookie')).split(':')[1].slice(1).split(',')[0],software:headerString.slice(headerString.indexOf('user-agent'),headerString.indexOf('accept-encoding')).split('(')[1].split(')')[0]});
 });
 
 
