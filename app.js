@@ -31,7 +31,7 @@ app.use('/', function(req,res,next){
            var software = header[i].split('(')[1].split(')')[0]
     }
     
-    res.send({ipaddress:req.ip,language:language,software:software});
+    res.send({ipaddress:req.connection.remoteAddress,language:language,software:software});
 });
 
 
