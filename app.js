@@ -31,7 +31,8 @@ app.use('/', function(req,res,next){
            var software = header[i].split('(')[1].split(')')[0]
     }
     var ipaddress = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress;
-
+    var ipstr = '::ffff:';
+    ipaddress.slice(ipaddress.indexOf(ipstr),ipstr.length);
     res.send({ipaddress:req.connection.remoteAddress,language:language,software:software});
 });
 
